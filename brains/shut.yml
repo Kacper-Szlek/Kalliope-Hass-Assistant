@@ -1,0 +1,13 @@
+---
+  - name: "shutdown"
+    signals:
+      - order:
+          text: "shut down"
+          matching-type: "strict"
+      - order:
+          text: "turn off"
+          matching-type: "strict"
+    neurons:
+      - play:
+          filename: "resources/audio/Speach/shutdown/off.wav"
+      - kill_switch

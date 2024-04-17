@@ -1,0 +1,2 @@
+#!/bin/bash
+echo update | nc -q 1 localhost 3243

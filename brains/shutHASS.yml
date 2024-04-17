@@ -1,0 +1,64 @@
+---
+  - name: "HASSf"
+    signals:
+      - order: 
+          text: "turn off the {{ dev }}"
+          matching-type: "strict"
+      - order: 
+          text: "shut down {{ dev }}"
+          matching-type: "strict"
+      - order: 
+          text: "turn off {{ dev }}"
+          matching-type: "strict"
+      - order: 
+          text: "{{ dev }} shutdown"
+          matching-type: "strict"
+      - order: 
+          text: "turn {{ dev }} off"
+          matching-type: "strict"
+      - order: 
+          text: "turn the {{ dev }} off"
+          matching-type: "strict"
+    neurons:
+    - settings:
+        variable:
+          device: "{{ dev }}"
+    - play:
+        filename:
+          - "resources/audio/Speach/hass/where0.wav"
+          - "resources/audio/Speach/hass/where1.wav"
+          - "resources/audio/Speach/hass/where2.wav"
+          - "resources/audio/Speach/hass/where3.wav"
+    - neurotransmitter:
+          from_answer_link:
+            - synapse: "workF"
+              answers:
+                - "workshop"
+                - "Workshop"
+            - synapse: "serverRF"
+              answers:
+                - "server room"
+          default: "noPlaceF"
+
+  - name: "noPlaceF"
+    signals:
+      - order: "noPlaceF"
+    neurons:
+      - play:
+          filename: "resources/audio/Speach/hass/nop.wav"
+
+  - name: "workF"
+    signals:
+      - order: "workF"
+    neurons:
+      - shell:
+          cmd: "bash resources/scritps/hass/hassF '{{ device }}' workshop"
+          async: True    
+
+  - name: "serverRF"
+    signals:
+      - order: "serverRF"
+    neurons:
+      - shell:
+          cmd: "bash resources/scritps/hass/hassF '{{ device }}' serverR"
+          async: True    

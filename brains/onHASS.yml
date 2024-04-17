@@ -1,0 +1,58 @@
+---
+  - name: "HASSn"
+    signals:
+      - order: 
+          text: "turn on the {{ dev }}"
+          matching-type: "strict"
+      - order: 
+          text: "turn on {{ dev }}"
+          matching-type: "strict"
+      - order: 
+          text: "turn {{ dev }} on"
+          matching-type: "strict"
+      - order: 
+          text: "turn the {{ dev }} on"
+          matching-type: "strict"
+    neurons:
+    - settings:
+        variable:
+          device: "{{ dev }}"
+    - play:
+        filename:
+          - "resources/audio/Speach/hass/where0.wav"
+          - "resources/audio/Speach/hass/where1.wav"
+          - "resources/audio/Speach/hass/where2.wav"
+          - "resources/audio/Speach/hass/where3.wav"
+    - neurotransmitter:
+          from_answer_link:
+            - synapse: "workN"
+              answers:
+                - "workshop"
+                - "Workshop"
+            - synapse: "serverRN"
+              answers:
+                - "server room"
+          default: "noPlaceN"
+
+  - name: "noPlaceN"
+    signals:
+      - order: "noPlaceN"
+    neurons:
+      - play:
+          filename: "resources/audio/Speach/hass/nop.wav"
+
+  - name: "workN"
+    signals:
+      - order: "workN"
+    neurons:
+      - shell:
+          cmd: "bash resources/scritps/hass/hassN '{{ device }}' workshop"
+          async: True
+
+  - name: "serverRN"
+    signals:
+      - order: "serverRN"
+    neurons:
+      - shell:
+          cmd: "bash resources/scritps/hass/hassN '{{ device }}' serverR"
+          async: True        

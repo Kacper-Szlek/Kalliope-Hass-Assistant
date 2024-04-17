@@ -1,0 +1,30 @@
+---
+  - name: "update"
+    signals:
+      - order:
+          text: "update"
+          mathing-type: "strict"
+      - order:
+          text: "update the system"
+          mathing-type: "strict"
+      - order:
+          text: "update node"
+          mathing-type: "strict"
+      - order:
+          text: "update yourself"
+          mathing-type: "strict"
+      - order:
+          text: "updates"
+          mathing-type: "strict"
+      - order:
+          text: "start updating"
+          mathing-type: "strict"
+      - order:
+          text: "start the update"
+          mathing-type: "strict"
+    neurons:
+      - play:
+          filename:
+            - "resources/audio/Speach/update/update.wav"
+      - shell:
+          cmd: "bash resources/scritps/update/update"

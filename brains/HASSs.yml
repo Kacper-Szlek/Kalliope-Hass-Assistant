@@ -1,0 +1,91 @@
+---
+  - name: "HASSs"
+    signals:
+      - order:
+          text: "server room"
+          mathing-type: "strict"
+      - order:
+          text: "server"
+          matching-type: "strict"
+    neurons:
+      - play:
+          filename:
+            - "resources/audio/Speach/hass/com.wav"
+      - neurotransmitter:
+          from_answer_link:
+            - synapse: "onSe"
+              answers:
+                - "turn on"
+                - "enable"
+            - synapse: "offs"
+              answers:
+                - "turn off"
+                - "shutdown"
+          default: "noCommS"
+  
+#-------------------------Turn On Command
+  - name: "onSe"
+    signals:
+      - order: "onSe"
+    neurons:
+      - play:
+          filename:
+            - "resources/audio/Speach/hass/which.wav"
+      - neurotransmitter:
+          from_answer_link:
+            - synapse: "tONs"
+              answers:
+                - "{{ dev }}"
+          default: "noDevS"
+
+  - name: "tONs"
+    signals:
+      - order: "tONs"
+    neurons:
+      - settings:
+          variable:
+            device: "{{ dev }}"
+      - shell:
+          cmd: "bash resources/scritps/hass/hassN '{{ device }}' serverR"
+          async: True
+
+#-------------------------Turn Off Command
+  - name: "offs"
+    signals:
+      - order: "offs"
+    neurons:
+      - play:
+          filename:
+            - "resources/audio/Speach/hass/which.wav"
+      - neurotransmitter:
+          from_answer_link:
+            - synapse: "tOFFs"
+              answers:
+                - "{{ dev }}"
+          default: "noDevS"
+
+  - name: "tOFFs"
+    signals:
+      - order: "tOFFs"
+    neurons:
+      - settings:
+          variable:
+            device: "{{ dev }}"
+      - shell:
+          cmd: "bash resources/scritps/hass/hassF '{{ device }}' serverR"
+          async: True
+
+#-------------------------Erroe messeages
+  - name: "noCommS"
+    signals:
+      - order: "noCommS"
+    neurons:
+      - play:
+          filename: "resources/audio/Speach/hass/noCom.wav"
+
+  - name: "noDevS"
+    signals:
+      - order: "noDevS"
+    neurons:
+      - play:
+          filename: "resources/audio/Speach/hass/noDev.wav"

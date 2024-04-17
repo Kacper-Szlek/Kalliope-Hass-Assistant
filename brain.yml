@@ -1,0 +1,28 @@
+---
+  - includes:
+        - brains/systemdate.yml
+        - brains/shut.yml
+        - brains/shutHASS.yml
+        - brains/onHASS.yml
+        - brains/HASSs.yml
+        - brains/mHASSo.yml
+        - brains/mHASSf.yml
+        - brains/update.yml
+
+  - name: "on-start-synapse"
+    signals: []
+    neurons:
+      - play:
+          filename: "resources/audio/sfx/242501__gabrielaraujo__powerup-success.wav"
+
+  - name: "on-triggered-synapse"
+    signals: []
+    neurons:
+      - play:
+          filename: "resources/audio/sfx/330048__paulmorek__beep-04-positive.wav"
+
+  - name: "order-not-found-synapse"
+    signals: []
+    neurons:
+      - play:
+          filename: "resources/audio/sfx/330053__paulmorek__beep-05-negative.wav"

@@ -1,0 +1,107 @@
+#!/bin/bash
+
+#-----------------------------------mHASSn
+if [ "$2" == "imid" ]
+then
+#---------------G_PC
+	if [ "$1" == "gaming" ] || [ "$1" == "gaming mashine" ] || [ "$1" == "the gaming mashine" ]
+	then
+		echo cnw | nc -q 1 192.168.1.34 3241
+		msg=$(nc -l 3242)
+		echo $msg
+		if [ "$msg" == "1" ]
+		then
+			echo cnn | nc -q 1 localhost 3243
+		else
+			echo cn | nc -q 1 localhost 3243
+		fi
+	fi
+fi
+
+#-----------------------------------Workshop
+if [ "$2" == "workshop" ] || [ "$2" == "imid" ]
+then
+#---------------Lights	
+	if [ "$1" == "lights" ] || [ "$1" == "light" ] || [ "$1" == "the light" ] || [ "$1" == "the lights" ] || [ "$1" == "turn the light" ] || [ "$1" == "turn the lights" ]
+	then
+		echo lnw | nc -q 1 192.168.1.34 3241
+		msg=$(nc -l 3242)
+		echo $msg
+		if [ "$msg" == "1" ]
+		then
+			echo lnn | nc -q 1 localhost 3243
+		else
+			echo ln | nc -q 1 localhost 3243
+		fi
+	fi
+#---------------Couch
+	if [ "$1" == "couch" ] || [ "$1" == "the couch" ] || [ "$1" == "turn the couch" ]
+	then
+		echo cnw | nc -q 1 192.168.1.34 3241
+		msg=$(nc -l 3242)
+		echo $msg
+		if [ "$msg" == "1" ]
+		then
+			echo cnn | nc -q 1 localhost 3243
+		else
+			echo cn | nc -q 1 localhost 3243
+		fi
+	fi
+#---------------CNC
+	if [ "$1" == "CNC" ] || [ "$1" == "the CNC" ] || [ "$1" == "turn the CNC" ]
+	then
+		echo cNnw | nc -q 1 192.168.1.34 3241
+		msg=$(nc -l 3242)
+		echo $msg
+		if [ "$msg" == "1" ]
+		then
+			echo cNnn | nc -q 1 localhost 3243
+		else
+			echo cNn | nc -q 1 localhost 3243
+		fi
+	fi
+fi
+
+#-----------------------------------Server_Room
+if [ "$2" == "serverR" ] || [ "$2" == "imid" ]
+then
+#---------------vault
+	if [ "$1" == "vault" ] || [ "$1" == "the vault" ] || [ "$1" == "turn the vault" ]
+	then
+		echo vns | nc -q 1 192.168.1.34 3241
+		msg=$(nc -l 3242)
+		echo $msg
+		if [ "$msg" == "1" ]
+		then
+			echo vnn | nc -q 1 localhost 3243
+		else
+			echo vn | nc -q 1 localhost 3243
+		fi
+	fi
+#---------------g585
+	if [ "$1" == "g585" ] || [ "$1" == "the g585" ] || [ "$1" == "turn the g585" ]
+	then
+		echo 5ns | nc -q 1 192.168.1.34 3241
+		msg=$(nc -l 3242)
+		echo $msg
+		if [ "$msg" == "1" ]
+		then
+			echo 5nn | nc -q 1 localhost 3243
+		else
+			echo 5n | nc -q 1 localhost 3243
+		fi
+	fi
+#---------------G server
+	if [ "$1" == "vault" ] || [ "$1" == "the vault" ] || [ "$1" == "turn the vault" ]
+	then
+		echo gsns | nc -q 1 192.168.1.34 3241
+		msg=$(nc -l 3242)
+		echo $msg
+		if [ "$msg" == "1" ]
+		then
+			echo gsnn | nc -q 1 localhost 3243
+		else
+			echo gsn | nc -q 1 localhost 3243
+		fi
+	fi
+fi

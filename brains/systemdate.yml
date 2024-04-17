@@ -1,0 +1,21 @@
+---
+  - name: "say-local-date"
+    signals:
+      - order: "what time"
+      - order: "which time"
+    neurons:
+      - play:
+          filename: "resources/audio/Speach/date/it.wav"
+      - systemdate:
+          say_template:
+            - "{{ hours }} {{ minutes }}"
+
+  - name: "say-local-date-from-template"
+    signals:
+      - order: "which date"
+      - order: "what date"
+    neurons:
+      - play:
+          filename: "resources/audio/Speach/date/we.wav"
+      - systemdate:
+          file_template: "templates/systemdate_template.j2"

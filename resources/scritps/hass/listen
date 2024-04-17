@@ -1,0 +1,80 @@
+#!/bin/bash
+#-------------This script listens to messegases thru netcat and then plays apropriate audio ques or scripts, this servers both hass as well as other automations
+while :
+do
+msg=$( nc -l 3243)
+echo $msg
+
+#-------------------------------------HASS
+#---------------Lights
+if [ "$msg" == "lf" ]
+then
+        aplay audio/lf.wav
+fi
+if [ "$msg" == "lff" ]
+then
+        aplay audio/lff.wav
+fi
+
+if [ "$msg" == "ln" ]
+then
+        aplay audio/ln.wav
+fi
+if [ "$msg" == "lnn" ]
+then
+        aplay audio/lnn.wav
+fi
+#---------------Couch
+if [ "$msg" == "cf" ]
+then
+        aplay audio/cf.wav
+fi
+if [ "$msg" == "cff" ]
+then
+        aplay audio/cff.wav
+fi
+
+if [ "$msg" == "cn" ]
+then
+        aplay audio/cn.wav
+fi
+if [ "$msg" == "cnn" ]
+then
+        aplay audio/cnn.wav
+fi
+#---------------CNC
+if [ "$msg" == "cNf" ]
+then
+        aplay audio/cNf.wav
+fi
+if [ "$msg" == "cNff" ]
+then
+        aplay audio/cNff.wav
+fi
+
+if [ "$msg" == "cNn" ]
+then
+        aplay audio/cNn.wav
+fi
+if [ "$msg" == "cNnn" ]
+then
+        aplay audio/cNnn.wav
+fi
+
+#-------------------------------------Update
+if [ "$msg" == "update" ]
+then
+        cd ..
+        cd ..
+        cd ..
+        stat=$(git pull)
+        cd resources/scritps/hass
+        if [ "$stat" == "Already up to date." ]
+        then
+                aplay audio/update/alr.wav
+        else
+                aplay audio/update/upda.wav
+        fi
+fi
+
+done

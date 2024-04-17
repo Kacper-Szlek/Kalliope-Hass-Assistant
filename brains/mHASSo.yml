@@ -1,0 +1,13 @@
+---
+  - name: "mHASSo"
+    signals:
+      - order: 
+          text: "{{ dev }} on"
+          matching-type: "strict"
+    neurons:
+      - settings:
+          variable:
+            device: "{{ dev }}"
+      - shell:
+          cmd: "bash resources/scritps/hass/hassN '{{ device }}' imid"
+          async: True    
